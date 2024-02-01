@@ -1,4 +1,4 @@
-alert('hi! inspect the console');
+alert('hi! try to beat the PC');
 
 
 /* strings -> fundamentals 2
@@ -30,9 +30,7 @@ function getComputerChoice(){
             computerChoice = 'scisors'
             return computerChoice;
             break;
-    }
-
-    
+    };    
 };
 
 
@@ -40,7 +38,7 @@ function getplayerSelection(){
 
     let getplayerSelection = prompt("Please choose between Rock, Paper or Scisors");
     getplayerSelection = getplayerSelection.toLowerCase(); 
-    alert(getplayerSelection);
+    /*alert(getplayerSelection);*/
 
     if (getplayerSelection === 'rock' | getplayerSelection === 'paper' | getplayerSelection === 'scisors') 
     {
@@ -57,37 +55,74 @@ function getplayerSelection(){
     }
 };
 
+function playGame() {
 
-const playerSelection = getplayerSelection();
-const computerSelection = getComputerChoice();
-let user_score = 0;
-let pc_score = 0;
+    let playerSelection;
+    let computerSelection;
+    let user_score = 0;
+    let pc_score = 0;
+    let roundCount = 1;
 
-function playRound(playerSelection, computerSelection) {
+    function playRound(playerSelection, computerSelection) {
 
-    alert("PC selection is: " + computerSelection + ". Player selection is: " + playerSelection)
-    if (playerSelection === computerSelection) {
-        alert('Its a tie!')
+        alert("PC selection is: " + computerSelection + ". Player selection is: " + playerSelection)
+        if (playerSelection === computerSelection) {
+            alert('Its a tie!')
+        };
+        if (playerSelection === 'paper' && computerSelection === 'rock') {
+            alert('You win!!')
+            ++user_score;
+            alert('your score is:' + user_score )
+            alert('PC score is:' + pc_score)
+        };
+        if (playerSelection === 'paper' && computerSelection === 'scisors') {
+            alert('You lose the round!!')
+            ++pc_score;
+            alert('your score is:' + user_score)
+            alert('PC score is:' + pc_score)
+        };
+        if (playerSelection === 'rock' && computerSelection === 'scisors') {
+            alert('You win the round!!')
+            ++user_score;
+            alert('your score is:' + user_score)
+            alert('PC score is:' + pc_score)
+        };
+        if (playerSelection === 'rock' && computerSelection === 'paper') {
+            alert('You lose!!')
+            ++pc_score;
+            alert('your score is:' + user_score)
+            alert('PC score is:' + pc_score)
+        };
+        if (playerSelection === 'scisors' && computerSelection === 'paper') {
+            alert('You win!!')
+            ++user_score;
+            alert('your score is:' + user_score)
+            alert('PC score is:' + pc_score)
+        };
+        if (playerSelection === 'scisors' && computerSelection === 'rock') {
+            alert('You lose!!')
+            ++pc_score;
+            alert('your score is:' + user_score)
+            alert('PC score is:' + pc_score)
+        };
+    };
+
+    while (roundCount < 6) {
+        computerSelection = getComputerChoice();
+        playerSelection = getplayerSelection();
+        playRound(playerSelection, computerSelection)
+        roundCount++
+        if (roundCount < 5) {
+            alert('round: ' + roundCount)
+            alert('next round:')
+        };
+    };
+
+    if (user_score > pc_score) {
+        alert("YOU WIN the game")
     }
-    if (playerSelection === 'paper' & computerSelection === 'rock') {
-        alert('You win!!')
-    }
-    if (playerSelection === 'paper' & computerSelection === 'scisors') {
-        alert('You lose!!')
-    }
-    if (playerSelection === 'rock' & computerSelection === 'scisors') {
-        alert('You win!!')
-    }
-    if (playerSelection === 'rock' & computerSelection === 'paper') {
-        alert('You lose!!')
-    }
-    if (playerSelection === 'scisors' & computerSelection === 'paper') {
-        alert('You win!!')
-    }
-    if (playerSelection === 'scisors' & computerSelection === 'rock') {
-        alert('You lose!!')
-    }
+    else {
+        alert("You lose the game.")
+    };
 };
-   
-
-console.log(playRound(playerSelection, computerSelection));
+playGame();
